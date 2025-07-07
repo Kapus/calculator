@@ -12,43 +12,34 @@ $page = isset($_GET['page']) && in_array($_GET['page'], $allowed_pages) ? $_GET[
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
     body {
-        background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1500&q=80');
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
+        background: #e9f0f7 !important;
+        background-image: none !important;
+        background-size: unset !important;
+        background-position: unset !important;
+        background-repeat: unset !important;
         min-height: 100vh;
+    }
+    html, body {
+        height: 100%;
+    }
+    .site-footer {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        z-index: 1000;
+    }
+    .main-content {
+        padding-bottom: 80px; /* Space for footer */
     }
     </style>
 </head>
 <body class="bg-light">
     <!-- Bootstrap Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="?page=home">Miniräknare</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Växla navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav ms-auto">
-            <li class="nav-item">
-              <a class="nav-link<?php if($page=='home') echo ' active'; ?>" aria-current="page" href="?page=home">Hem</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link<?php if($page=='features') echo ' active'; ?>" href="?page=features">Funktioner</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link<?php if($page=='about') echo ' active'; ?>" href="?page=about">Om</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link<?php if($page=='contact') echo ' active'; ?>" href="?page=contact">Kontakt</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-    <div class="container py-5">
+    <?php include __DIR__ . DIRECTORY_SEPARATOR . 'navbar.php'; ?>
+    <div class="container-fluid py-5 main-content">
         <div class="row justify-content-center">
-            <div class="col-md-6">
+            <div class="col-lg-8 col-xl-7">
                 <div class="card shadow-sm">
                     <div class="card-body text-center">
                         <?php
@@ -64,7 +55,19 @@ $page = isset($_GET['page']) && in_array($_GET['page'], $allowed_pages) ? $_GET[
             </div>
         </div>
     </div>
+    <?php include __DIR__ . DIRECTORY_SEPARATOR . 'footer.php'; ?>
     <!-- Bootstrap JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+    function updateClock() {
+        const now = new Date();
+        const h = now.getHours().toString().padStart(2, '0');
+        const m = now.getMinutes().toString().padStart(2, '0');
+        const s = now.getSeconds().toString().padStart(2, '0');
+        document.getElementById('clock').textContent = `${h}:${m}:${s}`;
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+    </script>
 </body>
 </html>
