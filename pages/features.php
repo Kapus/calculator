@@ -18,6 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <hr>
 <div style="height:200px;"></div>
 <h2 class="mb-3">Enkel miniräknare</h2>
+<div class="container mt-5 mb-5" style="max-width:900px;">
 <form method="post" class="row g-3 justify-content-center">
     <div class="col-auto">
         <input type="number" step="any" name="num1" class="form-control" placeholder="Första talet" required value="<?php if(isset($_POST['num1'])) echo htmlspecialchars($_POST['num1']); ?>">
@@ -40,3 +41,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <?php if($result !== ''): ?>
 <div class="alert alert-info mt-3">Resultat: <strong><?php echo $result; ?></strong></div>
 <?php endif; ?>
+</div>

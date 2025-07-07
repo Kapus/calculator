@@ -1,6 +1,5 @@
 <?php
 // profile.php - Användarprofil (exempel)
-// Inkludera databasanslutning
 require_once 'includes/db.php';
 
 // Hämta första användaren från databasen (exempel)
@@ -16,7 +15,7 @@ if (!$anvandare) {
 }
 ?>
 
-<div class="container mt-5">
+<div class="container mt-5 mb-5" style="max-width:900px;">
     <h2>Min profil</h2>
     <ul class="list-group">
         <li class="list-group-item"><strong>Namn:</strong> <?php echo htmlspecialchars($anvandare['namn']); ?></li>
