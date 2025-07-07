@@ -2,15 +2,21 @@
 // Weather API settings
 $weather = null;
 $error = '';
-$city = 'London'; // You can change the default city
+$city = 'Klippan,SE'; // Changed the default city to Klippan, Sweden
 $apiKey = '9685da3bce0b13091788171e3dababb1'; // Your OpenWeatherMap API key
-$url = "https://api.openweathermap.org/data/2.5/weather?q={$city}&appid={$apiKey}&units=metric";
-$response = @file_get_contents($url);
+$url = "https://api.openweathermap.org/data/2.5/weather?q={$city}&appid={$apiKey}&units=metric&lang=sv";
+
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, $url);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
+$response = curl_exec($ch);
 if ($response !== false) {
     $weather = json_decode($response, true);
 } else {
-    $error = 'Unable to fetch weather data.';
+    $error = 'Kunde inte hämta väderdata.';
 }
+curl_close($ch);
 ?>
 <style>
 body {
@@ -21,17 +27,17 @@ body {
     min-height: 100vh;
 }
 </style>
-<h1 class="display-4 mb-3">Hello, World!</h1>
-<p class="lead">This is a simple PHP Hello World using Bootstrap.</p>
+<h1 class="display-4 mb-3">Hej, världen!</h1>
+<p class="lead">Detta är ett enkelt PHP Hello World med Bootstrap.</p>
 <hr>
-<h2 class="mb-3">Current Weather in <?php echo htmlspecialchars($city); ?></h2>
+<h2 class="mb-3">Aktuellt väder i <?php echo htmlspecialchars($city); ?></h2>
 <?php if ($weather): ?>
     <div class="alert alert-info">
         <strong><?php echo $weather['weather'][0]['main']; ?></strong> -
         <?php echo $weather['weather'][0]['description']; ?><br>
-        Temperature: <?php echo $weather['main']['temp']; ?>&deg;C<br>
-        Humidity: <?php echo $weather['main']['humidity']; ?>%<br>
-        Wind: <?php echo $weather['wind']['speed']; ?> m/s
+        Temperatur: <?php echo $weather['main']['temp']; ?>&deg;C<br>
+        Luftfuktighet: <?php echo $weather['main']['humidity']; ?>%<br>
+        Vind: <?php echo $weather['wind']['speed']; ?> m/s
     </div>
 <?php elseif ($error): ?>
     <div class="alert alert-warning"><?php echo $error; ?></div>
