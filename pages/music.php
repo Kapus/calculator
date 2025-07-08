@@ -1,3 +1,13 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Musik</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-papm6p6Qw5Qw5Qw5Qw5Qw5Qw5Qw5Qw5Qw5Qw5Qw5Qw5Qw5Qw5Qw5Qw5Qw5Qw5Qw5Qw5Qw5Qw5Qw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
 <div class="container mt-5 mb-5" style="max-width:900px;">
     <h2 class="mb-5">Musik</h2>
     <div class="row">
@@ -166,6 +176,8 @@ window.addEventListener('DOMContentLoaded', function() {
                 return link.classList.contains('active');
             });
             if (current !== -1 && current < links.length - 1) {
+                // Set flag so next song auto-plays
+                sessionStorage.setItem('playMusic', '1');
                 // Go to next song
                 window.location = links[current + 1].href;
             }
@@ -181,3 +193,5 @@ window.addEventListener('DOMContentLoaded', function() {
     }
 });
 </script>
+</body>
+</html>
